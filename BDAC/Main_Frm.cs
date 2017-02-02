@@ -56,7 +56,9 @@ namespace BDAC
                 if (!checkGameTimer.Enabled)
                 {
                     startCheckBtn.Text = "Stop Monitoring";
+                    checkGame_Tick(this, null);
                     checkGameTimer.Start();
+                    Functions.log(DateTime.Now.ToString() + ": Started monitoring.");
                 }
                 else
                 {
@@ -66,10 +68,11 @@ namespace BDAC
                     dcLbl.ForeColor = Color.Red;
                     dcLbl.Text = "N/A";
 
-                    traySystem.Text = "BDCR";
+                    traySystem.Text = "BDAC";
 
                     startCheckBtn.Text = "Start Monitoring";
                     checkGameTimer.Stop();
+                    Functions.log(DateTime.Now.ToString() + ": Stopped monitoring.");
                 }
             }
             else
@@ -81,6 +84,7 @@ namespace BDAC
 
                 startCheckBtn.Text = "Stop Monitoring";
                 checkGameTimer.Start();
+                Functions.log(DateTime.Now.ToString() + ": Started monitoring.");
             }
         }
 

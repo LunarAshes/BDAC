@@ -33,6 +33,9 @@ namespace BDAC.Classes
         public bool gConnected = false;
         public bool autoClose = false;
 
+        private int concurrentFails = 0;
+        public int maxAttempts = 3;
+
         public void Monitor()
         {
             //Create a Thread to do the work
@@ -116,13 +119,20 @@ namespace BDAC.Classes
                         {
                             if (Process.GetProcessById(Convert.ToInt32(tokens[5].ToString())).ProcessName.Contains("BlackDesert"))
                             {
+                                concurrentFails = 0;
                                 return true;
                             }
                         }
                     }
 
+                    concurrentFails++;
+                    if (Mainform.nCloseDC.Checked)
+                    {
+                        log(DateTime.Now.ToString() + ": Failed to detect a connection " + concurrentFails + " time(s). Will attempt " + (maxAttempts - concurrentFails).ToString() + " more times.");
+                    }
+
                     //BDO has no active connection
-                    if(Mainform.nCloseDC.Checked)
+                    if(Mainform.nCloseDC.Checked && concurrentFails >= maxAttempts)
                     {
                         autoClose = true;
                     }
@@ -149,9 +159,18 @@ namespace BDAC.Classes
 
                         Mainform.checkShutdown.Start();
                     }
+                    log(DateTime.Now.ToString() + ": Killed all running instances.");
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "BD Auto Closer", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        public void log(string msg)
+        {
+            System.IO.StreamWriter writer = new System.IO.StreamWriter("log.txt", true);
+            writer.WriteLine(msg);
+            writer.Close();
+            writer.Dispose();
         }
 
         public void shutdownPC()

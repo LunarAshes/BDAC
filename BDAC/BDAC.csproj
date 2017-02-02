@@ -54,7 +54,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>racIco.ico</ApplicationIcon>
+    <ApplicationIcon>bdo_black_spirit_reaper_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -119,6 +119,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bdo_black_spirit_reaper_icon.ico" />
     <Content Include="racIco.ico" />
   </ItemGroup>
   <ItemGroup />

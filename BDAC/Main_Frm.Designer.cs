@@ -54,12 +54,12 @@
             // traySystem
             // 
             this.traySystem.Icon = ((System.Drawing.Icon)(resources.GetObject("traySystem.Icon")));
-            this.traySystem.Text = "BDCR";
+            this.traySystem.Text = "BDAC";
             this.traySystem.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.traySystem_MouseDoubleClick);
             // 
             // checkGameTimer
             // 
-            this.checkGameTimer.Interval = 3000;
+            this.checkGameTimer.Interval = 30000;
             this.checkGameTimer.Tick += new System.EventHandler(this.checkGame_Tick);
             // 
             // button1
